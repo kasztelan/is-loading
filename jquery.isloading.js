@@ -141,11 +141,15 @@
 
             if( "overlay" === this.options.position ) {
 
-                $( ".isloading-overlay" ).remove();
+                $( ".isloading-overlay" ).fadeOut('fast', function(){
+			        $(this).remove();
+			    });
 
             } else {
 
-                $( this._loader ).remove();
+                $( this._loader ).fadeOut('fast', function(){
+			        $(this).remove();
+			    });
                 $( this.element ).text( $( this.element ).attr( "data-isloading-label" ) );
 
             }
