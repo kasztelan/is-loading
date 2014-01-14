@@ -46,7 +46,8 @@
             'class': "icon-refresh",    // loader CSS class
             'tpl': '<span class="isloading-wrapper %wrapper%">%text%<i class="%class% icon-spin"></i></span>',    // loader base Tag
             'disableSource': true,      // true | false
-            'disableOthers': []
+            'disableOthers': [],
+            'overlayBackground': 'rgba(0,0,0,0.5)'
         };
 
     // The actual plugin constructor
@@ -111,7 +112,7 @@
 
                 case "overlay":
                     if( $( this.element ).is( "body") ) {
-                        $( "body" ).prepend( '<div class="isloading-overlay" style="position:fixed; left:0; top:0; z-index: 10000; background: rgba(0,0,0,0.5); width: 100%; height: ' + $( this.element ).outerHeight() + 'px;" />' );
+                        $( "body" ).prepend( '<div class="isloading-overlay" style="position:fixed; left:0; top:0; z-index: 10000; width: 100%; height: ' + $( this.element ).outerHeight() + 'px;" />' );
                     }
                     else {
                         var cssPosition = $( this.element ).css('position');
@@ -122,7 +123,7 @@
                         } else {
                             pos = $( this.element ).position();
                         }
-                        $( this.element ).prepend( '<div class="isloading-overlay" style="position:absolute; top: ' + pos.top + 'px; left: ' + pos.left + 'px; z-index: 10000; background: rgba(0,0,0,0.5); width: ' + $( this.element ).outerWidth() + 'px; height: ' + $( this.element ).outerHeight() + 'px;" />' );
+                        $( this.element ).prepend( '<div class="isloading-overlay" style="position:absolute; top: ' + pos.top + 'px; left: ' + pos.left + 'px; z-index: 10000; width: ' + $( this.element ).outerWidth() + 'px; height: ' + $( this.element ).outerHeight() + 'px;" />' );
                     }
 
                     $( ".isloading-overlay" ).html( this._loader );
