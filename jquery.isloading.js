@@ -112,7 +112,7 @@
 
                 case "overlay":
                     if( $( this.element ).is( "body") ) {
-			$( '<div class="isloading-overlay" style="position:fixed; left:0; top:0; z-index: 10000; width: 100%; height: ' + $( this.element ).outerHeight() + 'px;" />' )
+			$( '<div class="isloading-overlay" style="position:fixed; left:0; top:0; z-index: 1000; width: 100%; height: ' + $( this.element ).outerHeight() + 'px;" />' )
             		.hide().prependTo( "body" ).fadeIn("fast");                    }
                     else {
                         var cssPosition = $( this.element ).css('position');
@@ -123,7 +123,7 @@
                         } else {
                             pos = $( this.element ).position();
                         }
-                        $( '<div class="isloading-overlay" style="position:absolute; top: ' + pos.top + 'px; left: ' + pos.left + 'px; z-index: 10000; width: ' + $( this.element ).outerWidth() + 'px; height: ' + $( this.element ).outerHeight() + 'px;" />' )
+                        $( '<div class="isloading-overlay" style="position:absolute; top: ' + pos.top + 'px; left: ' + pos.left + 'px; z-index: 1000; width: ' + $( this.element ).outerWidth() + 'px; height: ' + $( this.element ).outerHeight() + 'px;" />' )
                         .hide().prependTo( this.element ).fadeIn("fast");
                     }
 
