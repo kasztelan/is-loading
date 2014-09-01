@@ -13,28 +13,7 @@
 * @author Laurent Blanes <laurent.blanes@gmail.com>
 * ---
 * Copyright 2013, Laurent Blanes ( https://github.com/hekigan/is-loading )
-* 
-* The MIT License (MIT)
-* 
-* Copyright (c) 2013 Laurent Blanes
-* 
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-* 
-* The above copyright notice and this permission notice shall be included in
-* all copies or substantial portions of the Software.
-* 
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-* THE SOFTWARE.
+* Released under the MIT, BSD, and GPL Licenses.
 */
 ;(function ( $, window, document, undefined ) {
 
@@ -46,8 +25,7 @@
             'class': "icon-refresh",    // loader CSS class
             'tpl': '<span class="isloading-wrapper %wrapper%">%text%<i class="%class% icon-spin"></i></span>',    // loader base Tag
             'disableSource': true,      // true | false
-            'disableOthers': [],
-            'overlayBackground': 'rgba(0,0,0,0.5)'
+            'disableOthers': []
         };
 
     // The actual plugin constructor
@@ -112,19 +90,11 @@
 
                 case "overlay":
                     if( $( this.element ).is( "body") ) {
-			$( '<div class="isloading-overlay" style="position:fixed; left:0; top:0; z-index: 1000; width: 100%; height: ' + $( this.element ).outerHeight() + 'px;" />' )
-            		.hide().prependTo( "body" ).fadeIn("fast");                    }
+                        $( "body" ).prepend( '<div class="isloading-overlay" style="position:fixed; left:0; top:0; z-index: 10000; background: rgba(0,0,0,0.5); width: 100%; height: ' + $( this.element ).outerHeight() + 'px;" />' );
+                    }
                     else {
-                        var cssPosition = $( this.element ).css('position');
-                        var pos = null;
-                        
-                        if( 'relative' === cssPosition ) {
-                            pos = { 'top': 0,  'left': 0 };
-                        } else {
-                            pos = $( this.element ).position();
-                        }
-                        $( '<div class="isloading-overlay" style="position:absolute; top: ' + pos.top + 'px; left: ' + pos.left + 'px; z-index: 1000; width: ' + $( this.element ).outerWidth() + 'px; height: ' + $( this.element ).outerHeight() + 'px;" />' )
-                        .hide().prependTo( this.element ).fadeIn("fast");
+                        var pos = $( this.element ).offset();
+                        $( "body" ).prepend( '<div class="isloading-overlay" style="position:absolute; top: ' + pos.top + 'px; left: ' + pos.left + 'px; z-index: 10000; background: rgba(0,0,0,0.5); width: ' + $( this.element ).outerWidth() + 'px; height: ' + $( this.element ).outerHeight() + 'px;" />' );
                     }
 
                     $( ".isloading-overlay" ).html( this._loader );
@@ -142,15 +112,11 @@
 
             if( "overlay" === this.options.position ) {
 
-                $( ".isloading-overlay" ).fadeOut('fast', function(){
-			        $(this).remove();
-			    });
+                $( ".isloading-overlay" ).remove();
 
             } else {
 
-                $( this._loader ).fadeOut('fast', function(){
-			        $(this).remove();
-			    });
+                $( this._loader ).remove();
                 $( this.element ).text( $( this.element ).attr( "data-isloading-label" ) );
 
             }
@@ -188,7 +154,7 @@
     // Constructor
     $.fn[pluginName] = function ( options ) {
         return this.each(function () {
-            if ( options && "hide" !== options || !$.data( this, "plugin_" + pluginName ) ) {
+            if ( !$.data( this, "plugin_" + pluginName ) ) {
                 $.data( this, "plugin_" + pluginName, new Plugin( this, options ) );
             } else {
                 var elt = $.data( this, "plugin_" + pluginName );
